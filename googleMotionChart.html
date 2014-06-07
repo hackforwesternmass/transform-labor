@@ -1,0 +1,59 @@
+<!--
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Google Visualization API Sample</title>
+  <script type="text/javascript" src="//www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['motionchart']});
+
+    function drawVisualization() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Industry');
+      data.addColumn('date', 'Year');
+      data.addColumn('number', 'Employment');
+      data.addColumn('number', 'WagesWeekly');
+      data.addColumn('number', 'Growth');
+      data.addColumn('string', 'County');
+      data.addRows([
+       // ['Total, All Industries', new Date(2013,0,1), 89511, 787, -0.003094591726, 'Franklin/Hampshire'],
+        ['11 - Agriculture, Forestry, Fishing & Hunting', new Date(2013,0,1), 1193, 456, 0.3772003353, 'Franklin/Hampshire'],
+        ['21 - Mining', new Date(2013,0,1), 55, 857, -0.03636363636, 'Franklin/Hampshire'],
+        ['23 - Construction', new Date(2013,0,1), 3602, 926, 0.02443087174, 'Franklin/Hampshire'],
+        ['31-33 - Manufacturing', new Date(2013,0,1), 7394, 943, -0.1888017311, 'Franklin/Hampshire'],
+        ['22 - Utilities', new Date(2013,0,1), 358, 1362, 0.1815642458, 'Franklin/Hampshire'],
+        ['42 - Wholesale Trade', new Date(2013,0,1), 2501, 907, -0.09196321471, 'Franklin/Hampshire'],
+        ['44-45 - Retail Trade', new Date(2013,0,1), 10665, 499, -0.01509610877, 'Franklin/Hampshire'],
+        ['48-49 - Transportation and Warehousing', new Date(2013,0,1), 2424, 731, 0.03877887789, 'Franklin/Hampshire'],
+        ['51 - Information', new Date(2013,0,1), 1392, 801, -0.1982758621, 'Franklin/Hampshire'],
+        ['52 - Finance and Insurance', new Date(2013,0,1), 1799, 1053, -0.01778765981, 'Franklin/Hampshire'],
+        ['53 - Real Estate and Rental and Leasing', new Date(2013,0,1), 824, 749, 0.01577669903, 'Franklin/Hampshire'],
+        ['54 - Professional and Technical Services', new Date(2013,0,1), 2379, 1012, 0.1647751156, 'Franklin/Hampshire'],
+        ['55 - Management of Companies and Enterprises', new Date(2013,0,1), 1128, 1369, 0.04875886525, 'Franklin/Hampshire'],
+        ['56 - Administrative and Waste Services', new Date(2013,0,1), 2389, 615, 0.0004185851821, 'Franklin/Hampshire'],
+        ['61 - Educational Services', new Date(2013,0,1), 19724, 1088, -0.04466639627, 'Franklin/Hampshire'],
+        ['62 - Health Care and Social Assistance', new Date(2013,0,1), 14269, 735, 0.1250262807, 'Franklin/Hampshire'],
+        ['71 - Arts, Entertainment, and Recreation', new Date(2013,0,1), 1856, 357, 0.1136853448, 'Franklin/Hampshire'],
+        ['72 - Accommodation and Food Services', new Date(2013,0,1), 8189, 295, 0.09854683111, 'Franklin/Hampshire'],
+        ['81 - Other Services, Ex. Public Admin', new Date(2013,0,1), 2776, 515, -0.5140489914, 'Franklin/Hampshire'],
+        ['92 - Public Administration', new Date(2013,0,1), 4594, 903, 0.0365694384, 'Franklin/Hampshire']
+      ]);
+    
+      var motionchart = new google.visualization.MotionChart(
+          document.getElementById('visualization'));
+      motionchart.draw(data, {'width': 800, 'height': 400});
+    }
+    
+
+    google.setOnLoadCallback(drawVisualization);
+  </script>
+</head>
+<body style="font-family: Arial;border: 0 none;">
+<div id="visualization" style="width: 800px; height: 400px;"></div>
+</body>
+</html>

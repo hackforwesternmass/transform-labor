@@ -1,0 +1,98 @@
+<html>
+  <head>
+  
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawCharts);
+
+		function drawCharts() {
+			drawChart();
+			drawChart2();
+		}
+
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Employment Location');
+        data.addColumn('number', 'Number of People');
+        data.addRows([
+          ['Franklin/Hampshire', 72993],
+          ['Hampden County', 16438],
+          ['Berkshire County', 4742],
+          ['Central Mass/Greater Worcester', 2802],
+          ['North Central MA', 3029],
+          ['Other Parts of MA', 2987],
+          ['Other States', 6051]
+        ]);
+
+        // Set chart options
+        var options = {title:'Employed Franklin/Hampshire Residents by Employment Location',
+                       width:800,
+                       height:600,
+                       legend:'none',
+                       pieSliceText:'label'};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        }
+        
+        function drawChart2() {
+                
+        	var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Employment Location');
+			data.addColumn('number', 'Number of People');
+			data.addRows([
+			  ['Franklin/Hampshire', 72993],
+			  ['Hampden County', 16498],
+			  ['Berkshire County', 1778],
+			  ['Central Mass/Greater Worcester', 779],
+			  ['North Central MA', 636],
+			  ['Other Parts of MA', 1179],
+			  ['Other States', 2815]
+			]);
+		
+			var options = {title: 'Residency Location of People Working in Franklin/Hampshire',
+						width:800,
+                       height:600,
+                       legend:'none',
+                       pieSliceText:'label'};
+
+		
+			var chart2 = new google.visualization.PieChart(document.getElementById('chart2_div'));
+			chart2.draw(data, options);
+      }
+    
+    </script>
+  </head>
+
+  <body>
+  	<div class="jumbotron">
+	    <h1> Journey to Work </h1>
+	</div>
+    
+    
+    <div class="container pull-left">
+	    <div id="chart_div" class="col-md-8"></div>
+    	<p class="col-md-4" style="margin-top:100px;" >
+		    Two thirds of the region's employed residents work in Franklin/Hampshire. Not surprisingly, Hampden County is the most common commuting destination with nearly 1 in 6 residents working in the county.
+	    </p>
+    </div>
+    <div class="container pull-left">
+    	<div id="chart2_div" class="col-md-8"></div>
+	    <p class="col-md-4" style="margin-top:100px;">
+    		From the employer vantage point, three quarters of their workforce comes from Franklin/Hampshire. This share is larger because of a net outflow of  workers (12,354) from Franklin/Hampshire. In total, 93% of all workers come from Franklin/Hampshire (76%) and Hampden (17%).
+	    </p>
+    </div>
+  </body>
+</html>

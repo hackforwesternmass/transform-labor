@@ -1,0 +1,53 @@
+<html>
+  <head>
+  
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">  
+  	
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Firm Size', 'Share of Establishments', 'Share of Employees'],
+          ['1-9',  68.9,   16.5],
+          ['10-19',  10.9, 12.4],
+          ['20-49',  6.6, 16.8],
+          ['50-99',  1.9, 10.5],
+          ['100-249', 1.3, 16.7],
+          ['250-499', 0.3, 10.1],
+          ['500+', 0.1, 17.0]
+        ]);
+
+        var options = {
+          title: 'Employment by Firm Size',
+          hAxis: {title: 'Firm Size'},
+          vAxis: {title: 'Percentage of Total'},
+          width: 700,
+          height:700
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+  	<div class="jumbotron">
+	    <h1> Employment by Firm Size</h1>
+	</div>
+    <div class="container pull-left">
+    	<div id="chart_div" class="col-md-8"></div>
+    	<p class="col-md-4" style="margin-top:100px;">
+    	A clear dichotomy exists between how employers are distributed by size relative to where employment is concentrated.
+    	</p><p class="col-md-4">
+    	Among the 6,602 establishments in Franklin/Hampshire, 62.9% had fewer than 5 employees. These firms, however, accounted for just 7.5 % of all jobs in the region.
+    	</p><p class="col-md-4">
+    	Reinforcing this dichotomy is that nearly 90% of all establishments in Franklin/Hampshire have fewer than 20 employees but comprise less than 30% of total employment in the region.
+		</p><p class="col-md-4">
+		Conversely, the 133 employers in the region with at least 100 employees (1.7%) are responsible for 44% of the workforce area’s employment.
+		</p>
+    </div>
+  </body>
+</html>

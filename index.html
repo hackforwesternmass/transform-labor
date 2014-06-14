@@ -14,91 +14,44 @@
     google.load('visualization', '1', {packages: ['corechart']});
   </script>
   <script type="text/javascript" src="fhlabor.js"></script>
+  <script type="text/javascript" src="fhindustry.js"></script>
+  <script type="text/javascript" src="fhfirmsize.js"></script>
+  <script type="text/javascript" src="fhjourney.js"></script>
   <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['motionchart']});
-
-    function drawVisualization(dataFn, chartId) {
-		var data = getData(dataFn);
-		var chart = new google.visualization.MotionChart(
-		     document.getElementById(chartId));
-		var options = {};
-		options['state'] = '{ "yLambda":1,"yZoomedDataMax":1,"xZoomedDataMin":0,"dimensions":{"iconDimensions":["dim0"]},"iconType":"BUBBLE","yAxisOption":"4","nonSelectedAlpha":0.4,"colorOption":"_UNIQUE_COLOR","xAxisOption":"3","orderedByX":false,"xZoomedIn":false,"iconKeySettings":[],"playDuration":15000,"xLambda":1,"yZoomedIn":false,"xZoomedDataMax":1369,"time":"2013","showTrails":false	,"sizeOption":"2","yZoomedDataMin":-0.5140489914,"duration":{"timeUnit":"D","multiplier":1},"uniColorForNonSelected":false,"orderedByY":false}';
-		options['width'] = 800;
-		options['height'] = 400;
-		//options['showXMetricPicker'] = false;
-		//options['showYMetricPicker'] = false;
-		chart.draw(data, options);
-    }
-
-	function drawFH(){ 
-		drawVisualization(
-			function(data){
-				data.addRows(getFrankHamp2012(data));
-				data.addRows(getFrankHamp2011(data));
-				data.addRows(getFrankHamp2010(data));
-				data.addRows(getFrankHamp2009(data));
-				data.addRows(getFrankHamp2008(data));
-				data.addRows(getFrankHamp2007(data));
-				data.addRows(getFrankHamp2006(data));
-				data.addRows(getFrankHamp2005(data));
-				data.addRows(getFrankHamp2004(data));
-				data.addRows(getFrankHamp2003(data));
-			},
-			'fh-chart'
-		); 
-	}
-	function reorderRow(row) {
-		var newRow = [ row[0].replace(/ .*/i, ""), row[3], row[4], row[5], row[2], row[0] ];
-		
-		return newRow;
-	}
-	
-	function reorder(data)
-	{
-		var newData = [];
-		for (var i = 0; i < data.length; ++i) {
-			newData.push(reorderRow(data[i]));
-		}
-		return newData;
-	}
-	
-	function getCompData()
-	{
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Id');
-		data.addColumn('number', 'WagesWeekly');
-		data.addColumn('number', 'Growth');
-		data.addColumn('string', 'County');
-		data.addColumn('number', 'Employment');
-		data.addColumn('string', 'Industry');
-		
-		data.addRows(reorder(getFrankHamp2012(data)));
-		data.addRows(reorder(getHampden2012(data)));
-
-		return data;
-	}
-	
-	function drawComp() {
-	    // Create and populate the data table.
-	    var data = getCompData();
-
-	    var options = {
-	      title: 'Comparison',
-	      vAxis: {title: 'Growth'},
-	      hAxis: {title: 'Wages'},
-	      bubble: {textStyle: {fontSize: 11}}
-	    };
-
-	    // Create and draw the visualization.
-	    var chart = new google.visualization.BubbleChart(
-	        document.getElementById('comp-chart'));
-	    chart.draw(data, options);
-	}
-	
-	
-	google.setOnLoadCallback(function() { drawFH(); drawComp(); });
-	
+	google.setOnLoadCallback(function() { 
+		drawFH();
+ 		drawComp(); 
+		drawFirmSizeChart();
+	});
   </script>
+    
+  </head>
+
+  <body>
+  	<div class="jumbotron">
+		<h1 class="text-center">Franklin Hampshire Labor Blueprint</h1>
+		 <h2 class="text-center">Journey to Work</h2>
+	
+	</div>
+    
+    
+    <div class="container pull-left">
+	    <div id="chart_div" class="col-md-8"></div>
+    	<p class="col-md-4" style="margin-top:100px;" >
+		    Two thirds of the region's employed residents work in Franklin/Hampshire. Not surprisingly, Hampden County is the most common commuting destination with nearly 1 in 6 residents working in the county.
+	    </p>
+    </div>
+    <div class="container pull-left">
+    	<div id="chart2_div" class="col-md-8"></div>
+	    <p class="col-md-4" style="margin-top:100px;">
+    		From the employer vantage point, three quarters of their workforce comes from Franklin/Hampshire. This share is larger because of a net outflow of  workers (12,354) from Franklin/Hampshire. In total, 93% of all workers come from Franklin/Hampshire (76%) and Hampden (17%).
+	    </p>
+    </div>
+  </body>
+</html>
+
+
+
   </head>
 
   <body>
@@ -121,8 +74,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-Industries by Wage and Growth<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a></h3>
+        <h3>Industries by Wage and Growth<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a></h3>
 
 <div id="fh-chart" style="width: 800px; height: 400px;"></div>
 
@@ -130,7 +82,13 @@ Industries by Wage and Growth<a name="welcome-to-github-pages" class="anchor" hr
 
 <div id="comp-chart" style="width: 800px; height: 600px;"></div>
 
+<h3><a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Employment by firm size</h3>
+<p>A clear dichotomy exists between how employers are distributed by size relative to where employment is concentrated.</p>
+<p>Among the 6,602 establishments in Franklin/Hampshire, 62.9% had fewer than 5 employees. These firms, however, accounted for just 7.5 % of all jobs in the region.</p>
+<p>Reinforcing this dichotomy is that nearly 90% of all establishments in Franklin/Hampshire have fewer than 20 employees but comprise less than 30% of total employment in the region.</p>
+<p>Conversely, the 133 employers in the region with at least 100 employees (1.7%) are responsible for 44% of the workforce area's employment.</p>
 
+<div id="firmsize-chart"></div>
 
       </section>
     </div>
